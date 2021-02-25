@@ -1,105 +1,91 @@
 class app {
+  constructor(modules, invocation) {
+    this.init(modules, invocation);
+  }
 
-	constructor(modules, invocation){
-		languagePluginLoader.then(() => {
-			// If you don't require for pre-loaded Python packages, remove this promise below.
-			window.pyodide.runPythonAsync("import setuptools, micropip").then(()=>{
-				window.pyodide.runPythonAsync("micropip.install('lark-parser')").then(()=>{
-					this.fetchSources(modules).then(() => {
-						window.pyodide.runPythonAsync("import " + Object.keys(modules).join("\nimport ") + "\n" + invocation + "\n").then(() => this.initializingComplete());
-					});
-				});
-			});
-		});
-	}
+  async init(modules, invocation) {
+    await languagePluginLoader;
+    await pyodide.runPythonAsync("import micropip; micropip.install('lark-parser')");
+    await this.fetchSources(modules);
+    await pyodide.runPythonAsync("import " + Object.keys(modules).join("\nimport ") + "\n" + invocation + "\n");
 
-	loadSources(module, baseURL, files) {
-		let promises = [];
+    document.body.classList.remove("is-loading");
+  }
 
-		for (let f in files) {
-			promises.push(
-				new Promise((resolve, reject) => {
-					let file = files[f];
-					let url = (baseURL ? baseURL + "/" : "") + file;
+  loadSources(module, baseURL, files) {
+    let promises = [];
 
-					fetch(url, {}).then((response) => {
-						if (response.status === 200)
-							return response.text().then((code) => {
-								let path = ("/lib/python3.7/site-packages/" + module + "/" + file).split("/");
-								let lookup = "";
+    for (let f in files) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          let file = files[f];
+          let url = (baseURL ? baseURL + "/" : "") + file;
 
-								for (let i in path) {
-									if (!path[i]) {
-										continue;
-									}
+          const response = await fetch(url, {});
+          if (response.status === 200) {
+            const code = await response.text();
+            let path = ("/lib/python3.7/site-packages/" + module + "/" + file).split("/");
+            let lookup = "";
+            for (let i in path) {
+              if (!path[i]) {
+                continue;
+              }
 
-									lookup += (lookup ? "/" : "") + path[i];
+              lookup += (lookup ? "/" : "") + path[i];
 
-									if (parseInt(i) === path.length - 1) {
-										window.pyodide._module.FS.writeFile(lookup, code);
-										console.debug(`fetched ${lookup}`);
-									} else {
-										try {
-											window.pyodide._module.FS.lookupPath(lookup);
-										} catch {
-											window.pyodide._module.FS.mkdir(lookup);
-											console.debug(`created ${lookup}`);
-										}
-									}
-								}
+              if (parseInt(i) === path.length - 1) {
+                pyodide._module.FS.writeFile(lookup, code);
+                console.debug(`fetched ${lookup}`);
+              } else {
+                try {
+                  pyodide._module.FS.lookupPath(lookup);
+                } catch {
+                  pyodide._module.FS.mkdir(lookup);
+                  console.debug(`created ${lookup}`);
+                }
+              }
+            }
+            resolve();
+          } else {
+            reject();
+          }
+        })
+      );
+    }
 
-								resolve();
-							});
-						else
-							reject();
-					});
-				})
-			);
-		}
+    return Promise.all(promises);
+  }
 
-		return Promise.all(promises);
-	}
+  async fetchSources(modules) {
+    let promises = [];
 
-	fetchSources(modules) {
-		let promises = [];
+    for (let module of Object.keys(modules)) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          var response = await fetch(`${modules[module]}/files.json`, {});
+          if (response.status === 200) {
+            var list = await response.text();
+            let files = JSON.parse(list);
 
-		for( let module of Object.keys(modules) )
-		{
-			promises.push(
-				new Promise((resolve, reject) => {
-					fetch(`${modules[module]}/files.json`, {}).then((response) => {
-						if (response.status === 200) {
-							response.text().then((list) => {
-								let files = JSON.parse(list);
+            await this.loadSources(module, modules[module], files);
+            resolve();
+          } else {
+            reject();
+          }
+        }));
+    }
 
-								this.loadSources(module, modules[module], files).then(() => {
-									resolve();
-								})
-							})
-						} else {
-							reject();
-						}
-					})
-				}));
-		}
-
-		return Promise.all(promises).then(() => {
-			for( let module of Object.keys(modules) ) {
-				window.pyodide.loadedPackages[module] = "default channel";
-			}
-
-			window.pyodide.runPython(
-				'import importlib as _importlib\n' +
-				'_importlib.invalidate_caches()\n'
-			);
-		});
-	}
-
-	initializingComplete() {
-		document.body.classList.remove("is-loading")
-	}
+    await Promise.all(promises);
+    for (let module_2 of Object.keys(modules)) {
+      pyodide.loadedPackages[module_2] = "default channel";
+    }
+    pyodide.runPython(
+      'import importlib as _importlib\n' +
+      '_importlib.invalidate_caches()\n'
+    );
+  }
 }
 
 (function () {
-	window.top.app = new app({"app": "app"}, "import app.app; app.app.start()");
+  top.app = new app({ "app": "app" }, "import app.app; app.app.start()");
 })();
