@@ -64,6 +64,7 @@
 		let r = await fetch('grammars/' + grammar_to_load + '.lark')
 		if (r.ok) {
 			grammar = await r.text()
+			editor.set_text(grammar)
 			for (let g of grammars) 
 				if (g.name === grammar_to_load) {
 					text = g.text
@@ -73,7 +74,6 @@
 	}
 
 	let editor
-	$: editor && editor.set_text(grammar)
 	
 </script>
 
