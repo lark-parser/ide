@@ -4,7 +4,12 @@
 
 <script lang="ts">
 	import Editor from '$lib/Editor.svelte'
+	import Options from '$lib/Options.svelte'
 	import init_python from '../python.js'
+
+	const DEFAULT_OPTIONS = {
+		parser: 'earley'
+	}
 
 	const grammars = [
 			{
@@ -16,15 +21,18 @@
 				title: "(easy) JSON parser",
 				name: 'json',
 				text: '{"this": ["is", "JSON"]}',
+				options: {parser: 'lalr'},
 			},
 			{
 				title: "(easy) Calculator",
 				name: 'calc',
 				text: '20 / (13 - 6) + 1',
+				options: {parser: 'lalr'},
 			},
 		]
 
 	let {grammar, options, text} = grammars[0]
+	options = options || DEFAULT_OPTIONS
 
 	let parser_promise
 	let result_promise
@@ -46,7 +54,7 @@
 
 	function update_lark_parser(grammar, options) {
 		pyodide.globals.set('grammar', grammar)
-		pyodide.globals.set('options', options || {})
+		pyodide.globals.set('options', options)
 		return pyodide.runPythonAsync(create_parser)
 	}
 
@@ -68,6 +76,7 @@
 			for (let g of grammars) 
 				if (g.name === grammar_to_load) {
 					text = g.text
+					options = g.options || DEFAULT_OPTIONS
 					break
 				}
 		}
@@ -86,6 +95,9 @@
 	<div id="grammar_pane">
 <!-- 		<textarea id="grammar" bind:value={grammar}></textarea>
  -->
+ 		<div id="options">
+	 		<Options bind:options={options}/>
+	 	</div>
  		<Editor id="grammar" bind:this={editor} bind:text={grammar} on:ready={editor_ready}/>
 		<div>
 			Load grammar:
@@ -155,15 +167,25 @@
 		min-height: 85vh;
 		flex-grow: 1;
 	}
+
 	#text {
 		grid-area: text;
 		height: 100px;
 	}
 	#output {
 		grid-area: output;
+		overflow-x: scroll;
 	}
 
 	textarea, #output, #grammar_pane {
 		margin: 20px;
 	}
+
+	#options {
+		margin-bottom: 10px;
+		padding: 5px;
+		border-radius: 5px;
+	}
+
+
 </style>
