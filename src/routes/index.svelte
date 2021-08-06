@@ -61,7 +61,7 @@
 	let grammar_to_load = "hello"
 	async function load_grammar() {
 		console.log("Loading grammar", grammar_to_load)
-		let r = await fetch('/static/grammars/' + grammar_to_load + '.lark')
+		let r = await fetch('grammars/' + grammar_to_load + '.lark')
 		if (r.ok) {
 			grammar = await r.text()
 			for (let g of grammars) 
