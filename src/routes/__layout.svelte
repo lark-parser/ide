@@ -7,7 +7,7 @@
 	<nav>
 		<div id="home">
 			<a href="/">
-				<img src="/lark-logo.png" />
+				<img src="/lark-logo.png" alt="lark logo" />
 			</a>
 		</div>
 		<div id="title">
