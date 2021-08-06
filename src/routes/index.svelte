@@ -13,6 +13,11 @@
 
 	const grammars = [
 			{
+				title: "Blank",
+				name: 'blank',
+				text: '',
+			},
+			{
 				title: "(easy) Hello World",
 				name: 'hello',
 				text: 'Hello, World!',
@@ -31,7 +36,7 @@
 			},
 		]
 
-	let {grammar, options, text} = grammars[0]
+	let {grammar, options, text} = grammars[1]
 	options = options || DEFAULT_OPTIONS
 
 	let parser_promise
@@ -48,7 +53,7 @@
 		// If loaded before, they might interfere with each other
 		// Probably due to a require() collision
 		if (!pyodide) {
-			init_python( (p) => {pyodide = p}, (e) => {pyodide_log = [...pyodide_log, e]})
+			// init_python( (p) => {pyodide = p}, (e) => {pyodide_log = [...pyodide_log, e]})
 		}
 	}
 
@@ -69,6 +74,14 @@
 	let grammar_to_load = "hello"
 	async function load_grammar() {
 		console.log("Loading grammar", grammar_to_load)
+		if (grammar_to_load === 'blank') {
+			text = ''
+			grammar = ''
+			editor.set_text('')
+			options = DEFAULT_OPTIONS
+			return;
+		}
+
 		let r = await fetch('grammars/' + grammar_to_load + '.lark')
 		if (r.ok) {
 			grammar = await r.text()
@@ -98,17 +111,19 @@
  		<div id="options">
 	 		<Options bind:options={options}/>
 	 	</div>
- 		<Editor id="grammar" bind:this={editor} bind:text={grammar} on:ready={editor_ready}/>
-		<div>
-			Load grammar:
-			<select bind:value={grammar_to_load} on:change="{load_grammar}">
-			{#each grammars as g}
-				<option value={g.name}>
-					{g.title}
-				</option>
-			{/each}
-			</select>
+		<div id="load-grammar">
+ 			<div class="option">
+ 				<div> Load Grammar: </div>
+				<select bind:value={grammar_to_load} on:change="{load_grammar}">
+				{#each grammars as g}
+					<option value={g.name}>
+						{g.title}
+					</option>
+				{/each}
+				</select>
+			</div>
 		</div>
+		<Editor id="grammar" bind:this={editor} bind:text={grammar} on:ready={editor_ready}/>
 	</div>
 	<textarea id="text" bind:value={text}></textarea>
 
@@ -184,8 +199,22 @@
 	#options {
 		margin-bottom: 10px;
 		padding: 5px;
-		border-radius: 5px;
 	}
+
+	#load-grammar {
+		margin-bottom: 10px;
+		padding: 5px;
+	}
+	#load-grammar select {
+		background: #eee;
+		margin-left:  10px;
+	}
+
+		.option {
+			display: flex;
+			align-items: flex-start;
+		}
+
 
 
 </style>
