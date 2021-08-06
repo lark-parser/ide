@@ -53,7 +53,7 @@
 		// If loaded before, they might interfere with each other
 		// Probably due to a require() collision
 		if (!pyodide) {
-			// init_python( (p) => {pyodide = p}, (e) => {pyodide_log = [...pyodide_log, e]})
+			init_python( (p) => {pyodide = p}, (e) => {pyodide_log = [...pyodide_log, e]})
 		}
 	}
 
