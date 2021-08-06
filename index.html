@@ -9,16 +9,16 @@
 
 		
 
-		<link rel="modulepreload" href="/ide/_app/start-113a9d95.js">
+		<link rel="modulepreload" href="/ide/_app/start-3ff377f3.js">
 		<link rel="modulepreload" href="/ide/_app/chunks/vendor-8f9d1cf9.js">
 		<link rel="modulepreload" href="/ide/_app/pages/__layout.svelte-9fcbfac2.js">
-		<link rel="modulepreload" href="/ide/_app/pages/index.svelte-cd2e5170.js">
+		<link rel="modulepreload" href="/ide/_app/pages/index.svelte-55e1ddf7.js">
 		<link rel="stylesheet" href="/ide/_app/assets/start-a8cd1609.css">
 		<link rel="stylesheet" href="/ide/_app/assets/pages/__layout.svelte-934ceb42.css">
-		<link rel="stylesheet" href="/ide/_app/assets/pages/index.svelte-d36a2d01.css">
+		<link rel="stylesheet" href="/ide/_app/assets/pages/index.svelte-5b4fe673.css">
 
 		<script type="module">
-			import { start } from "/ide/_app/start-113a9d95.js";
+			import { start } from "/ide/_app/start-3ff377f3.js";
 			start({
 				target: document.querySelector("#svelte"),
 				paths: {"base":"/ide","assets":"/ide"},
@@ -32,7 +32,7 @@
 					error: null,
 					nodes: [
 						import("/ide/_app/pages/__layout.svelte-9fcbfac2.js"),
-						import("/ide/_app/pages/index.svelte-cd2e5170.js")
+						import("/ide/_app/pages/index.svelte-55e1ddf7.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -57,23 +57,24 @@
 
 <main class="svelte-4et5ei">
 
-<section id="ide" class="svelte-17fyc71"><div id="grammar_pane" class="svelte-17fyc71">
- 		<div id="options" class="svelte-17fyc71"><div id="options"><div class="option svelte-fi2lts"><div>Parser: </div>
+<section id="ide" class="svelte-99vlcc"><div id="grammar_pane" class="svelte-99vlcc">
+ 		<div id="options" class="svelte-99vlcc"><div id="options"><div class="option svelte-fi2lts"><div>Parser: </div>
 	 			<div><input type="radio" id="earley" name="parser" value="earley" checked checked>
 		  <label for="earley">Earley</label></div>
 
 		<div><input type="radio" id="lalr" name="parser" value="lalr">
 		  <label for="lalr">LALR(1)</label></div></div>
  		</div></div>
- 		<div style="height: 80vh; border: 1px solid grey"></div>
-<div>Load grammar:
-	<select><option value="hello">(easy) Hello World
-		</option><option value="json">(easy) JSON parser
-		</option><option value="calc">(easy) Calculator
-		</option></select></div></div>
-	<textarea id="text" class="svelte-17fyc71">Hello, World!</textarea>
+<div id="load-grammar" class="svelte-99vlcc"><div class="option svelte-99vlcc"><div>Load Grammar: </div>
+		<select class="svelte-99vlcc"><option value="blank">Blank
+			</option><option value="hello">(easy) Hello World
+			</option><option value="json">(easy) JSON parser
+			</option><option value="calc">(easy) Calculator
+			</option></select></div></div>
+<div style="height: 80vh; border: 1px solid grey"></div></div>
+	<textarea id="text" class="svelte-99vlcc">Hello, World!</textarea>
 
-	<div id="output" class="svelte-17fyc71">Please wait, loading...
+	<div id="output" class="svelte-99vlcc">Please wait, loading...
 <ul></ul></div>
 </section></main>
 
