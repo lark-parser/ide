@@ -126,9 +126,12 @@
 			</pre>
 		{/await}
 	{:else}
+		Please wait, loading...
+		<ul>
 		{#each pyodide_log as e}
-			<p>{e}</p>
+			<li>{e}</li>
 		{/each}
+		</ul>
 	{/if}
 	</div>
 </section>
