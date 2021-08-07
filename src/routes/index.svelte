@@ -9,7 +9,8 @@
 	import init_python from '../python.js'
 
 	const DEFAULT_OPTIONS = {
-		parser: 'earley'
+		parser: 'earley',
+		keep_all_tokens: false
 	}
 
 	const grammars = [
@@ -58,10 +59,16 @@
 		}
 	}
 
-	function update_lark_parser(grammar, options) {
+	function update_lark_parser() {
 		pyodide.globals.set('grammar', grammar)
 		pyodide.globals.set('options', options)
-		return pyodide.runPythonAsync(create_parser)
+		parser_promise = pyodide.runPythonAsync(create_parser)
+	}
+
+	let parserRefreshDelay;
+	function delayed_update_lark_parser() {
+		clearTimeout(parserRefreshDelay);
+		parserRefreshDelay = setTimeout(update_lark_parser, PARSER_REFRESH_DELAY);
 	}
 
 	function update_lark_result(text) {
@@ -69,8 +76,12 @@
 		return pyodide.runPythonAsync('parser.parse(text)')
 	}
 
-	$: lark_promise = pyodide && update_lark_parser(grammar, options)
-	$: result_promise = pyodide && lark_promise && update_lark_result(text)
+
+	const PARSER_REFRESH_DELAY = 500
+
+	$: pyodide && options && update_lark_parser()
+	$: pyodide && grammar && delayed_update_lark_parser()
+	$: result_promise = pyodide && parser_promise && update_lark_result(text)
 
 	let grammar_to_load = "hello"
 	async function load_grammar() {
@@ -130,21 +141,17 @@
 
 	<div id="output">
 	{#if pyodide}
-		{#await lark_promise}
+		{#await parser_promise}
 			Building Parser...
 		{:then}
 			{#await result_promise}
 				Parsing...
 			{:then result}
-				<Tree tree={result} />
-<!-- 				{#if result.type == "Tree"}
-					<pre>
-					  {result.pretty()}
-					</pre>
+				{#if result}
+					<Tree tree={result} />
 				{:else}
-					{result}
+					No result
 				{/if}
- -->				
 			{:catch e}
 				<pre>
 					{e}

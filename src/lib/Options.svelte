@@ -2,23 +2,27 @@
 	export let options
 
 	let parser
-
+	let keep_all_tokens
 
 	$: options && optionsChanged()
 
 	function optionsChanged() {
 		parser = options.parser
+		keep_all_tokens = options.keep_all_tokens
 	}
 
 	function parserChanged(event) {
-		options = {...options, parser: event.target.value}
+		setTimeout(() => {
+			options = {...options, parser}
+		})
+	}
+	function keepChanged(event) {
+		setTimeout(() => {
+			options = {...options, keep_all_tokens}
+		})
 	}
 
 </script>
-
-
-
-
 
 		<div id="options">
  			<div class="option">
@@ -33,13 +37,23 @@
 				  <label for="lalr">LALR(1)</label>
 				</div>
 			</div>
+ 			<div class="option">
+ 				<input type="checkbox" bind:checked={keep_all_tokens} on:input={keepChanged} id="keep_all_tokens">
+				<label for="keep_all_tokens">Keep all tokens</label>
+ 			</div>
  		</div>
 
-	<style>
+<style>
 
-		.option {
-			display: flex;
-			align-items: flex-start;
-		}
+	.option {
+		display: flex;
+		align-items: flex-start;
+	}
 
-	</style>
+	#options {
+		display: flex;
+		justify-content: space-between;
+
+	}
+
+</style>
