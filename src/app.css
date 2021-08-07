@@ -18,6 +18,10 @@
 	--base-margin: 20px;
 }
 
+html {
+	background: white;
+}
+
 body {
 	min-height: 100vh;
 	margin: 0;

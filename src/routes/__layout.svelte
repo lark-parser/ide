@@ -1,6 +1,32 @@
 <script lang="ts">
 	import '../app.css';
 
+	let fullscreen = false
+
+	function openFullscreen() {
+	  let elem = document.getElementsByTagName('body')[0]
+	  if (elem.requestFullscreen) {
+	    elem.requestFullscreen();
+	  } else if (elem.webkitRequestFullscreen) { /* Safari */
+	    elem.webkitRequestFullscreen();
+	  } else if (elem.msRequestFullscreen) { /* IE11 */
+	    elem.msRequestFullscreen();
+	  }
+
+	  fullscreen = true
+	}
+
+	function closeFullscreen() {
+	  if (document.exitFullscreen) {
+	    document.exitFullscreen();
+	  } else if (document.webkitExitFullscreen) { /* Safari */
+	    document.webkitExitFullscreen();
+	  } else if (document.msExitFullscreen) { /* IE11 */
+	    document.msExitFullscreen();
+	  }
+
+	  fullscreen = false
+	}
 </script>
 
 <header>
@@ -17,7 +43,11 @@
 			Parser IDE
 		</div>
 		<div id="right-panel">
-			&nbsp;
+			{#if fullscreen}
+			<button on:click={closeFullscreen}>exit full screen</button>
+			{:else}
+			<button on:click={openFullscreen}>full screen</button>
+			{/if}
 		</div>
 	</nav>
 </header>
@@ -52,6 +82,8 @@
 	}
 	#right-panel {
 		width:  200px;
+		text-align: right;
+		margin: var(--base-margin);
 	}
 
 
