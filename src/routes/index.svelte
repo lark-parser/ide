@@ -133,7 +133,9 @@
 				</select>
 			</div>
 		</div>
-		<Editor id="grammar" bind:this={editor} bind:text={grammar} on:ready={editor_ready}/>
+		<div id="grammar">
+			<Editor bind:this={editor} bind:text={grammar} on:ready={editor_ready}/>
+		</div>
 	</div>
 	<textarea id="text" bind:value={text}></textarea>
 
@@ -174,26 +176,32 @@
 <style>
 	#ide {
 		display: grid;
-		grid-template-areas: 
-		    "grammar text"
-		    "grammar output";
-	    grid-template-columns: 30% auto;
-	    grid-template-rows: 150px auto;
+		grid-template: 
+		    "grammar text" min-content
+		    "grammar output" 1fr
+		        / min-content 1fr;
+
+		flex: 1 1 auto;
 	}
 
 	#grammar_pane {
 		grid-area: grammar;
 		display: flex;
 		flex-direction: column;
+
+		resize: horizontal;
+		overflow: auto;
+		width: 50vw;
 	}
 	#grammar {
-		min-height: 85vh;
-		flex-grow: 1;
+		display: flex;
+		flex: 1 1 auto;
 	}
 
 	#text {
 		grid-area: text;
 		height: 100px;
+		resize:  vertical;
 	}
 	#output {
 		grid-area: output;
@@ -218,11 +226,10 @@
 		margin-left:  10px;
 	}
 
-		.option {
-			display: flex;
-			align-items: flex-start;
-		}
-
+	.option {
+		display: flex;
+		align-items: flex-start;
+	}
 
 
 </style>

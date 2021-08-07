@@ -53,8 +53,24 @@ body::before {
 #svelte {
 	min-height: 100vh;
 	display: flex;
-	flex-direction: column;
+	flex-flow: column;
 }
+
+#svelte > header {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+#svelte > main {
+  flex: 1 1 auto;
+  display: flex;
+}
+
+#svelte > footer {
+}
+
+
 
 h1,
 h2,

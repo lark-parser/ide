@@ -149,5 +149,5 @@
 
 <div
 	bind:this={container}
-	style="height: 80vh; border: 1px solid grey" />
+	style="flex-grow: 1; overflow: hidden; border: 1px solid grey" />
 

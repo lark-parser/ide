@@ -60,6 +60,8 @@
 </footer>
 
 <style>
+
+
 	main {
 		width: 100%;
 	}
