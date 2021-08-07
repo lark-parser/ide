@@ -12,6 +12,7 @@
 		parser: 'earley',
 		keep_all_tokens: false
 	}
+	const PARSER_REFRESH_DELAY = 500
 
 	const grammars = [
 			{
@@ -75,9 +76,6 @@
 		pyodide.globals.set('text', text)
 		return pyodide.runPythonAsync('parser.parse(text)')
 	}
-
-
-	const PARSER_REFRESH_DELAY = 500
 
 	$: pyodide && options && update_lark_parser()
 	$: pyodide && grammar && delayed_update_lark_parser()
