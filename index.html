@@ -9,16 +9,16 @@
 
 		
 
-		<link rel="modulepreload" href="/ide/_app/start-e4a64f7a.js">
+		<link rel="modulepreload" href="/ide/_app/start-55e7b227.js">
 		<link rel="modulepreload" href="/ide/_app/chunks/vendor-be96c903.js">
-		<link rel="modulepreload" href="/ide/_app/pages/__layout.svelte-01cf817f.js">
-		<link rel="modulepreload" href="/ide/_app/pages/index.svelte-b0c480ca.js">
+		<link rel="modulepreload" href="/ide/_app/pages/__layout.svelte-75a3c7c7.js">
+		<link rel="modulepreload" href="/ide/_app/pages/index.svelte-0a393212.js">
 		<link rel="stylesheet" href="/ide/_app/assets/start-a8cd1609.css">
-		<link rel="stylesheet" href="/ide/_app/assets/pages/__layout.svelte-de08029f.css">
-		<link rel="stylesheet" href="/ide/_app/assets/pages/index.svelte-3e1b4e5c.css">
+		<link rel="stylesheet" href="/ide/_app/assets/pages/__layout.svelte-ffafc619.css">
+		<link rel="stylesheet" href="/ide/_app/assets/pages/index.svelte-e4aec881.css">
 
 		<script type="module">
-			import { start } from "/ide/_app/start-e4a64f7a.js";
+			import { start } from "/ide/_app/start-55e7b227.js";
 			start({
 				target: document.querySelector("#svelte"),
 				paths: {"base":"/ide","assets":"/ide"},
@@ -31,8 +31,8 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/ide/_app/pages/__layout.svelte-01cf817f.js"),
-						import("/ide/_app/pages/index.svelte-b0c480ca.js")
+						import("/ide/_app/pages/__layout.svelte-75a3c7c7.js"),
+						import("/ide/_app/pages/index.svelte-0a393212.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -49,18 +49,18 @@
 		<div id="svelte">
 
 
-<header><nav class="svelte-1pdjfo3"><div id="home" class="svelte-1pdjfo3"><a><img src="lark-logo.png" alt="lark logo" class="svelte-1pdjfo3"></a>
+<header><nav class="svelte-qsbq8j"><div id="home" class="svelte-qsbq8j"><a><img src="lark-logo.png" alt="lark logo" class="svelte-qsbq8j"></a>
 	<a href="https://lark-parser.readthedocs.io/en/latest/" target="_blank">docs</a>
 	<a href="https://github.com/lark-parser/ide" target="_blank">source</a>
 	<a href="https://github.com/lark-parser/lark" target="_blank">parser</a></div>
-<div id="title" class="svelte-1pdjfo3">Parser IDE
+<div id="title" class="svelte-qsbq8j">Parser IDE
 </div>
-<div id="right-panel" class="svelte-1pdjfo3"><button>full screen</button></div></nav></header>
+<div id="right-panel" class="svelte-qsbq8j"><button>full screen</button></div></nav></header>
 
-<main class="svelte-1pdjfo3">
+<main class="svelte-qsbq8j">
 
-<section id="ide" class="svelte-99vlcc"><div id="grammar_pane" class="svelte-99vlcc">
- 		<div id="options" class="svelte-99vlcc"><div id="options" class="svelte-lws3ey"><div class="option svelte-lws3ey"><div>Parser: </div>
+<section id="ide" class="svelte-1ekapp8"><div id="grammar_pane" class="svelte-1ekapp8">
+ 		<div id="options" class="svelte-1ekapp8"><div id="options" class="svelte-lws3ey"><div class="option svelte-lws3ey"><div>Parser: </div>
 	 			<div><input type="radio" id="earley" name="parser" value="earley" checked checked>
 		  <label for="earley">Earley</label></div>
 
@@ -69,16 +69,16 @@
  			<div class="option svelte-lws3ey"><input type="checkbox" id="keep_all_tokens">
 		<label for="keep_all_tokens">Keep all tokens</label></div>
  		</div></div>
-<div id="load-grammar" class="svelte-99vlcc"><div class="option svelte-99vlcc"><div>Load Grammar: </div>
-		<select class="svelte-99vlcc"><option value="blank">Blank
+<div id="load-grammar" class="svelte-1ekapp8"><div class="option svelte-1ekapp8"><div>Load Grammar: </div>
+		<select class="svelte-1ekapp8"><option value="blank">Blank
 			</option><option value="hello">(easy) Hello World
 			</option><option value="json">(easy) JSON parser
 			</option><option value="calc">(easy) Calculator
 			</option></select></div></div>
-<div style="height: 80vh; border: 1px solid grey"></div></div>
-	<textarea id="text" class="svelte-99vlcc">Hello, World!</textarea>
+<div id="grammar" class="svelte-1ekapp8"><div style="flex-grow: 1; overflow: hidden; border: 1px solid grey"></div></div></div>
+	<textarea id="text" class="svelte-1ekapp8">Hello, World!</textarea>
 
-	<div id="output" class="svelte-99vlcc">Please wait, loading...
+	<div id="output" class="svelte-1ekapp8">Please wait, loading...
 <ul></ul></div>
 </section></main>
 
