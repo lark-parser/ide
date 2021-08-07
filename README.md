@@ -9,6 +9,8 @@ npm install
 npm run dev
 ```
 
+Served on https://lark-parser.github.io/ide
+
 MIT License
 
 Contributions are welcome!

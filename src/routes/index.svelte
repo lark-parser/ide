@@ -3,6 +3,7 @@
 </script>
 
 <script lang="ts">
+	import Tree from '$lib/Tree.svelte'
 	import Editor from '$lib/Editor.svelte'
 	import Options from '$lib/Options.svelte'
 	import init_python from '../python.js'
@@ -135,13 +136,15 @@
 			{#await result_promise}
 				Parsing...
 			{:then result}
-				{#if result.type == "Tree"}
+				<Tree tree={result} />
+<!-- 				{#if result.type == "Tree"}
 					<pre>
 					  {result.pretty()}
 					</pre>
 				{:else}
 					{result}
 				{/if}
+ -->				
 			{:catch e}
 				<pre>
 					{e}

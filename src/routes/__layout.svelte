@@ -6,12 +6,15 @@
 <header>
 	<nav>
 		<div id="home">
-			<a href="/">
+			<a>
 				<img src="lark-logo.png" alt="lark logo" />
 			</a>
+			<a href="https://lark-parser.readthedocs.io/en/latest/" target='_blank'>docs</a>
+			<a href="https://github.com/lark-parser/ide" target='_blank'>source</a>
+			<a href="https://github.com/lark-parser/lark" target='_blank'>parser</a>
 		</div>
 		<div id="title">
-			IDE
+			Parser IDE
 		</div>
 		<div id="right-panel">
 			&nbsp;
