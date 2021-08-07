@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css';
+	import 'bulma/css/bulma.css';
 
 	let fullscreen = false
 
@@ -44,9 +45,9 @@
 		</div>
 		<div id="right-panel">
 			{#if fullscreen}
-			<button on:click={closeFullscreen}>exit full screen</button>
+			<button class="button is-text" on:click={closeFullscreen}>exit full screen</button>
 			{:else}
-			<button on:click={openFullscreen}>full screen</button>
+			<button class="button is-text" on:click={openFullscreen}>full screen</button>
 			{/if}
 		</div>
 	</nav>

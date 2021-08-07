@@ -31,6 +31,7 @@
   "dependencies": {
     "@fontsource/fira-mono": "^4.2.2",
     "@lukeed/uuid": "^2.0.0",
+    "bulma": "^0.9.3",
     "cookie": "^0.4.1"
   }
 }

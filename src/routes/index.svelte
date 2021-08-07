@@ -45,12 +45,13 @@
 	let parser_promise
 	let result_promise
 	let create_parser = "parser = lark.Lark(grammar, **options.to_py())"
+	let editor_text
 
 	let pyodide
 	let pyodide_log = []
 
 	async function editor_ready() {
-		load_grammar()
+		load_grammar('hello')
 
 		// Load pyocide after the editor is done loading
 		// If loaded before, they might interfere with each other
@@ -67,9 +68,11 @@
 	}
 
 	let parserRefreshDelay;
-	function delayed_update_lark_parser() {
+	function update_grammar_from_editor() {
 		clearTimeout(parserRefreshDelay);
-		parserRefreshDelay = setTimeout(update_lark_parser, PARSER_REFRESH_DELAY);
+		parserRefreshDelay = setTimeout(() => {
+			grammar = editor_text
+		}, PARSER_REFRESH_DELAY);
 	}
 
 	function update_lark_result(text) {
@@ -77,12 +80,13 @@
 		return pyodide.runPythonAsync('parser.parse(text)')
 	}
 
-	$: pyodide && options && update_lark_parser()
-	$: pyodide && grammar && delayed_update_lark_parser()
+	$: pyodide && options && grammar && update_lark_parser()
+
+	$: pyodide && editor_text && update_grammar_from_editor()
+
 	$: result_promise = pyodide && parser_promise && update_lark_result(text)
 
-	let grammar_to_load = "hello"
-	async function load_grammar() {
+	async function load_grammar(grammar_to_load) {
 		console.log("Loading grammar", grammar_to_load)
 		if (grammar_to_load === 'blank') {
 			text = ''
@@ -118,23 +122,39 @@
 	<div id="grammar_pane">
 <!-- 		<textarea id="grammar" bind:value={grammar}></textarea>
  -->
- 		<div id="options">
-	 		<Options bind:options={options}/>
-	 	</div>
-		<div id="load-grammar">
- 			<div class="option">
- 				<div> Load Grammar: </div>
-				<select bind:value={grammar_to_load} on:change="{load_grammar}">
-				{#each grammars as g}
-					<option value={g.name}>
-						{g.title}
-					</option>
-				{/each}
-				</select>
+
+ 		<div id="above_grammar">
+			<div id="load-grammar">
+	 			<div class="option">
+					<div class="dropdown is-hoverable">
+					  <div class="dropdown-trigger">
+					    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+					      <span>Load Grammar</span>
+					      <span class="icon is-small">
+					        <i class="fas fa-angle-down" aria-hidden="true"></i>
+					      </span>
+					    </button>
+					  </div>
+					  <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+					    <div class="dropdown-content">
+						  {#each grammars as g}
+					      <a href="#" class="dropdown-item" on:click={() => {load_grammar(g.name)}}>
+					        {g.title}
+					      </a>
+						  {/each}
+					    </div>
+					  </div>
+					</div>
+	 	
+				</div>
 			</div>
-		</div>
+	 		<div id="options">
+		 		<Options bind:options={options}/>
+		 	</div>
+		 </div>
+
 		<div id="grammar">
-			<Editor bind:this={editor} bind:text={grammar} on:ready={editor_ready}/>
+			<Editor bind:this={editor} bind:text={editor_text} on:ready={editor_ready}/>
 		</div>
 	</div>
 	<textarea id="text" bind:value={text}></textarea>
@@ -164,6 +184,8 @@
 		{/await}
 	{:else}
 		Please wait, loading...
+
+		<progress class="progress is-info" value={pyodide_log.length} max="4">XX</progress>
 		<ul>
 		{#each pyodide_log as e}
 			<li>{e}</li>
@@ -215,6 +237,7 @@
 	#options {
 		margin-bottom: 10px;
 		padding: 5px;
+	 	margin-left: 20px;
 	}
 
 	#load-grammar {
@@ -231,5 +254,8 @@
 		align-items: flex-start;
 	}
 
+	#above_grammar {
+		display: flex;
+	}
 
 </style>

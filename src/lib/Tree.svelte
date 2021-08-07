@@ -65,6 +65,7 @@
 	.label {
 		color: #44c;
 		font-family: sans-serif;
+		display: inline-block;
 	}
 </style>
 

@@ -24,22 +24,21 @@
 
 </script>
 
-		<div id="options">
+		<div class="list">
  			<div class="option">
- 				<div> Parser: </div>
-	 			<div>
-				  <input type="radio" id="earley" name="parser" on:input={parserChanged} bind:group={parser} value="earley" checked />
-				  <label for="earley">Earley</label>
-				</div>
-
-				<div>
-				  <input type="radio" id="lalr" name="parser" on:input={parserChanged} bind:group={parser} value="lalr" />
-				  <label for="lalr">LALR(1)</label>
+ 				<div class="select">
+				  <select bind:value={parser} on:input={parserChanged}>
+				    <option value="earley">Parser: Earley</option>
+				    <option value="lalr">Parser: LALR(1)</option>
+				  </select>
 				</div>
 			</div>
+
  			<div class="option">
- 				<input type="checkbox" bind:checked={keep_all_tokens} on:input={keepChanged} id="keep_all_tokens">
-				<label for="keep_all_tokens">Keep all tokens</label>
+				<label class="checkbox" for="keep_all_tokens">
+	 				<input class="checkbox" type="checkbox" bind:checked={keep_all_tokens} on:input={keepChanged} id="keep_all_tokens">
+	 				Keep all tokens
+ 				</label>
  			</div>
  		</div>
 
@@ -48,12 +47,14 @@
 	.option {
 		display: flex;
 		align-items: flex-start;
+		margin-left: 20px;
 	}
 
-	#options {
+	.list {
 		display: flex;
+		flex-flow: wrap;
 		justify-content: space-between;
-
+		align-items: center;
 	}
 
 </style>
