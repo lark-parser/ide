@@ -9,16 +9,16 @@
 
 		
 
-		<link rel="modulepreload" href="/ide/_app/start-55e7b227.js">
-		<link rel="modulepreload" href="/ide/_app/chunks/vendor-be96c903.js">
-		<link rel="modulepreload" href="/ide/_app/pages/__layout.svelte-75a3c7c7.js">
-		<link rel="modulepreload" href="/ide/_app/pages/index.svelte-0a393212.js">
+		<link rel="modulepreload" href="/ide/_app/start-2cbb9695.js">
+		<link rel="modulepreload" href="/ide/_app/chunks/vendor-b08d787a.js">
+		<link rel="modulepreload" href="/ide/_app/pages/__layout.svelte-f1081127.js">
+		<link rel="modulepreload" href="/ide/_app/pages/index.svelte-97454ff2.js">
 		<link rel="stylesheet" href="/ide/_app/assets/start-a8cd1609.css">
-		<link rel="stylesheet" href="/ide/_app/assets/pages/__layout.svelte-ffafc619.css">
-		<link rel="stylesheet" href="/ide/_app/assets/pages/index.svelte-e4aec881.css">
+		<link rel="stylesheet" href="/ide/_app/assets/pages/__layout.svelte-2148e0fe.css">
+		<link rel="stylesheet" href="/ide/_app/assets/pages/index.svelte-2a34c484.css">
 
 		<script type="module">
-			import { start } from "/ide/_app/start-55e7b227.js";
+			import { start } from "/ide/_app/start-2cbb9695.js";
 			start({
 				target: document.querySelector("#svelte"),
 				paths: {"base":"/ide","assets":"/ide"},
@@ -31,8 +31,8 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/ide/_app/pages/__layout.svelte-75a3c7c7.js"),
-						import("/ide/_app/pages/index.svelte-0a393212.js")
+						import("/ide/_app/pages/__layout.svelte-f1081127.js"),
+						import("/ide/_app/pages/index.svelte-97454ff2.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -55,30 +55,32 @@
 	<a href="https://github.com/lark-parser/lark" target="_blank">parser</a></div>
 <div id="title" class="svelte-qsbq8j">Parser IDE
 </div>
-<div id="right-panel" class="svelte-qsbq8j"><button>full screen</button></div></nav></header>
+<div id="right-panel" class="svelte-qsbq8j"><button class="button is-text">full screen</button></div></nav></header>
 
 <main class="svelte-qsbq8j">
 
-<section id="ide" class="svelte-1ekapp8"><div id="grammar_pane" class="svelte-1ekapp8">
- 		<div id="options" class="svelte-1ekapp8"><div id="options" class="svelte-lws3ey"><div class="option svelte-lws3ey"><div>Parser: </div>
-	 			<div><input type="radio" id="earley" name="parser" value="earley" checked checked>
-		  <label for="earley">Earley</label></div>
+<section id="ide" class="svelte-96j91"><div id="grammar_pane" class="svelte-96j91">
 
-		<div><input type="radio" id="lalr" name="parser" value="lalr">
-		  <label for="lalr">LALR(1)</label></div></div>
- 			<div class="option svelte-lws3ey"><input type="checkbox" id="keep_all_tokens">
-		<label for="keep_all_tokens">Keep all tokens</label></div>
- 		</div></div>
-<div id="load-grammar" class="svelte-1ekapp8"><div class="option svelte-1ekapp8"><div>Load Grammar: </div>
-		<select class="svelte-1ekapp8"><option value="blank">Blank
-			</option><option value="hello">(easy) Hello World
-			</option><option value="json">(easy) JSON parser
-			</option><option value="calc">(easy) Calculator
-			</option></select></div></div>
-<div id="grammar" class="svelte-1ekapp8"><div style="flex-grow: 1; overflow: hidden; border: 1px solid grey"></div></div></div>
-	<textarea id="text" class="svelte-1ekapp8">Hello, World!</textarea>
+ 		<div id="above_grammar" class="svelte-96j91"><div id="load-grammar" class="svelte-96j91"><div class="option svelte-96j91"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu3"><span>Load Grammar</span>
+			      <span class="icon is-small"><i class="fas fa-angle-down" aria-hidden="true"></i></span></button></div>
+			  <div class="dropdown-menu" id="dropdown-menu3" role="menu"><div class="dropdown-content"><a href="#" class="dropdown-item">Blank
+			      </a><a href="#" class="dropdown-item">(easy) Hello World
+			      </a><a href="#" class="dropdown-item">(easy) JSON parser
+			      </a><a href="#" class="dropdown-item">(easy) Calculator
+			      </a></div></div></div></div></div>
+	 		<div id="options" class="svelte-96j91"><div class="list svelte-1ia7u11"><div class="option svelte-1ia7u11"><div class="select"><select><option value="earley">Parser: Earley</option><option value="lalr">Parser: LALR(1)</option></select></div></div>
 
-	<div id="output" class="svelte-1ekapp8">Please wait, loading...
+ 			<div class="option svelte-1ia7u11"><label class="checkbox" for="keep_all_tokens"><input class="checkbox" type="checkbox" id="keep_all_tokens">
+	 				Keep all tokens
+ 				</label></div>
+ 		</div></div></div>
+
+<div id="grammar" class="svelte-96j91"><div style="flex-grow: 1; overflow: hidden; border: 1px solid grey"></div></div></div>
+	<textarea id="text" class="svelte-96j91">Hello, World!</textarea>
+
+	<div id="output" class="svelte-96j91">Please wait, loading...
+
+<progress class="progress is-info" value="0" max="4">XX</progress>
 <ul></ul></div>
 </section></main>
 
