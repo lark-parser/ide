@@ -90,8 +90,8 @@
 		console.log("Loading grammar", grammar_to_load)
 		if (grammar_to_load === 'blank') {
 			text = ''
-			grammar = ''
-			editor.set_text('')
+			grammar = 'start:'
+			editor.set_text(grammar)
 			options = DEFAULT_OPTIONS
 			return;
 		}
