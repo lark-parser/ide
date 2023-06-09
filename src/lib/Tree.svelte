@@ -46,7 +46,7 @@
 		margin: 0;
 		list-style: none;
 		padding-left: 1.2rem; 
-		user-select: none;
+		/* user-select: none; */
 	}
 	.no-arrow { padding-left: 1.0rem; }
 	.arrow {

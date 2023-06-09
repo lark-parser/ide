@@ -1,6 +1,4 @@
 
-import { onMount } from 'svelte';
-
 export default function init(callback, log) {
   	log && log("Loading Pyodide")
 

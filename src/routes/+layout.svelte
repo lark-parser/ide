@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../app.css';
+	import './app.css';
 	import 'bulma/css/bulma.css';
 
 	let fullscreen = false

@@ -1,3 +1,5 @@
+// This is a very simple (and incomplete) JSON parser
+
 ?start: value
 
 ?value: object
