@@ -34,13 +34,20 @@
 			{
 				title: "(easy) Calculator",
 				name: 'calc',
-				text: '20 / (13 - 6) + 1',
+				text: '2 + 20 / (13 - 6) + 1.5',
 				options: {parser: 'lalr'},
+			},
+			{
+				title: "(easy) fruit flies like bananas",
+				name: 'fruitflies',
+				text: 'fruit flies like bananas',
+				options: {ambiguity: 'explicit'},
 			},
 		]
 
-	let {grammar, options, text} = grammars[1]
-	options = options || DEFAULT_OPTIONS
+	let grammar = ""
+	let text = ""
+	let options = DEFAULT_OPTIONS
 
 	let parser_promise
 	let result_promise
@@ -120,9 +127,6 @@
 <section id="ide">
 
 	<div id="grammar_pane">
-<!-- 		<textarea id="grammar" bind:value={grammar}></textarea>
- -->
-
  		<div id="above_grammar">
 			<div id="load-grammar">
 	 			<div class="option">

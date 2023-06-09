@@ -1,0 +1,15 @@
+// This toy grammar demonstrates how to deal with ambiguity
+
+sentence: noun verb noun        -> simple
+        | noun verb "like" noun -> comparative
+
+noun: adj? NOUN
+verb: VERB
+adj: ADJ
+
+NOUN: "flies" | "bananas" | "fruit"
+VERB: "like" | "flies"
+ADJ: "fruit"
+
+%import common.WS
+%ignore WS
