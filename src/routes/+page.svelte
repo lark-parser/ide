@@ -1,7 +1,3 @@
-<script context="module" lang="ts">
-	export const prerender = true;
-</script>
-
 <script lang="ts">
 	import Tree from '$lib/Tree.svelte'
 	import Editor from '$lib/Editor.svelte'
@@ -34,20 +30,27 @@
 			{
 				title: "(easy) Calculator",
 				name: 'calc',
-				text: '20 / (13 - 6) + 1',
+				text: '2 + 20 / (13 - 6) + 1.5',
 				options: {parser: 'lalr'},
+			},
+			{
+				title: "(easy) Fruit flies like bananas",
+				name: 'fruitflies',
+				text: 'fruit flies like bananas',
+				options: {ambiguity: 'explicit'},
 			},
 		]
 
-	let {grammar, options, text} = grammars[1]
-	options = options || DEFAULT_OPTIONS
+	let grammar = ""
+	let text = ""
+	let options = DEFAULT_OPTIONS
 
 	let parser_promise
 	let result_promise
 	let create_parser = "parser = lark.Lark(grammar, **options.to_py())"
-	let editor_text
+	let editor_text: string
 
-	let pyodide
+	let pyodide: {globals: any, runPythonAsync: (s: string) => any}
 	let pyodide_log = []
 
 	async function editor_ready() {
@@ -67,7 +70,7 @@
 		parser_promise = pyodide.runPythonAsync(create_parser)
 	}
 
-	let parserRefreshDelay;
+	let parserRefreshDelay: NodeJS.Timeout;
 	function update_grammar_from_editor() {
 		clearTimeout(parserRefreshDelay);
 		parserRefreshDelay = setTimeout(() => {
@@ -90,7 +93,7 @@
 		console.log("Loading grammar", grammar_to_load)
 		if (grammar_to_load === 'blank') {
 			text = ''
-			grammar = ''
+			grammar = 'start:'
 			editor.set_text('')
 			options = DEFAULT_OPTIONS
 			return;
@@ -103,7 +106,7 @@
 			for (let g of grammars) 
 				if (g.name === grammar_to_load) {
 					text = g.text
-					options = g.options || DEFAULT_OPTIONS
+					options = {...DEFAULT_OPTIONS, ...g.options}
 					break
 				}
 		}
@@ -120,9 +123,6 @@
 <section id="ide">
 
 	<div id="grammar_pane">
-<!-- 		<textarea id="grammar" bind:value={grammar}></textarea>
- -->
-
  		<div id="above_grammar">
 			<div id="load-grammar">
 	 			<div class="option">

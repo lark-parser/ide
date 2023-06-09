@@ -48,6 +48,7 @@
 		display: flex;
 		align-items: flex-start;
 		margin-left: 20px;
+		user-select: none;
 	}
 
 	.list {
