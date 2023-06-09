@@ -29,7 +29,9 @@
 		{:else}
 			<span>
 				<span class="no-arrow"/>
-				{tree.data}
+				<span class="label empty"> 
+					{tree.data}
+				</span>
 			</span>
 		{/if}
 
@@ -66,6 +68,12 @@
 		color: #44c;
 		font-family: sans-serif;
 		display: inline-block;
+	}
+	.empty::after {
+		content: " (empty)";
+		color: gray;
+		font-style: italic;
+		font-weight: normal;
 	}
 </style>
 

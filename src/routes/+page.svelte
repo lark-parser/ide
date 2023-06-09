@@ -39,6 +39,18 @@
 				text: 'fruit flies like bananas',
 				options: {ambiguity: 'explicit'},
 			},
+			{
+				title: "(avg) Configuration grammar",
+				name: 'conf',
+				text: '[main]\nhello=world\n',
+				options: {parser: 'lalr'},
+			},
+			{
+				title: "(avg) Lark grammar",
+				name: 'lark',
+				text: 'start: "Hello" "World"',
+				options: {parser: 'lalr'},
+			},
 		]
 
 	let grammar = ""
