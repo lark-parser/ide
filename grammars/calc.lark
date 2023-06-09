@@ -1,3 +1,5 @@
+// Shows how to best implement operator precedence in Lark
+
 ?start: sum
       | NAME "=" sum    -> assign_var
 

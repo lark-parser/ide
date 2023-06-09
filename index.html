@@ -2,104 +2,86 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="favicon.svg" />
+		<link rel="icon" href="./favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-		<title>Lark IDE</title>
-
 		
-
-		<link rel="modulepreload" href="/ide/_app/start-2cbb9695.js">
-		<link rel="modulepreload" href="/ide/_app/chunks/vendor-b08d787a.js">
-		<link rel="modulepreload" href="/ide/_app/pages/__layout.svelte-f1081127.js">
-		<link rel="modulepreload" href="/ide/_app/pages/index.svelte-97454ff2.js">
-		<link rel="stylesheet" href="/ide/_app/assets/start-a8cd1609.css">
-		<link rel="stylesheet" href="/ide/_app/assets/pages/__layout.svelte-2148e0fe.css">
-		<link rel="stylesheet" href="/ide/_app/assets/pages/index.svelte-2a34c484.css">
-
-		<script type="module">
-			import { start } from "/ide/_app/start-2cbb9695.js";
-			start({
-				target: document.querySelector("#svelte"),
-				paths: {"base":"/ide","assets":"/ide"},
-				session: {},
-				host: location.host,
-				route: true,
-				spa: false,
-				trailing_slash: "never",
-				hydrate: {
-					status: 200,
-					error: null,
-					nodes: [
-						import("/ide/_app/pages/__layout.svelte-f1081127.js"),
-						import("/ide/_app/pages/index.svelte-97454ff2.js")
-					],
-					page: {
-						host: location.host, // TODO this is redundant
-						path: "/",
-						query: new URLSearchParams(""),
-						params: {}
-					}
-				}
-			});
-		</script>
-
+		<link href="./_app/immutable/assets/0.5d22bdd7.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/2.b38b388e.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.605fde93.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.ff588ce8.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.816929ed.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.78fc783f.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.94b240e8.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.37d2abc9.js"><title>Lark IDE</title><!-- HEAD_svelte-3fm5e0_START --><!-- HEAD_svelte-3fm5e0_END --><!-- HEAD_svelte-3fm5e0_START --><!-- HEAD_svelte-3fm5e0_END -->
 	</head>
-	<body>
+	<body data-sveltekit-preload-data="hover">
 		<div id="svelte">
 
 
 <header><nav class="svelte-qsbq8j"><div id="home" class="svelte-qsbq8j"><a><img src="lark-logo.png" alt="lark logo" class="svelte-qsbq8j"></a>
-	<a href="https://lark-parser.readthedocs.io/en/latest/" target="_blank">docs</a>
-	<a href="https://github.com/lark-parser/ide" target="_blank">source</a>
-	<a href="https://github.com/lark-parser/lark" target="_blank">parser</a></div>
-<div id="title" class="svelte-qsbq8j">Parser IDE
-</div>
-<div id="right-panel" class="svelte-qsbq8j"><button class="button is-text">full screen</button></div></nav></header>
+			<a href="https://lark-parser.readthedocs.io/en/latest/" target="_blank">docs</a>
+			<a href="https://github.com/lark-parser/ide" target="_blank">source</a>
+			<a href="https://github.com/lark-parser/lark" target="_blank">parser</a></div>
+		<div id="title" class="svelte-qsbq8j">Parser IDE
+		</div>
+		<div id="right-panel" class="svelte-qsbq8j"><button class="button is-text">full screen</button></div></nav></header>
 
 <main class="svelte-qsbq8j">
 
-<section id="ide" class="svelte-96j91"><div id="grammar_pane" class="svelte-96j91">
+<section id="ide" class="svelte-96j91"><div id="grammar_pane" class="svelte-96j91"><div id="above_grammar" class="svelte-96j91"><div id="load-grammar" class="svelte-96j91"><div class="option svelte-96j91"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu3"><span>Load Grammar</span>
+					      <span class="icon is-small"><i class="fas fa-angle-down" aria-hidden="true"></i></span></button></div>
+					  <div class="dropdown-menu" id="dropdown-menu3" role="menu"><div class="dropdown-content"><a href="#" class="dropdown-item">Blank
+					      </a><a href="#" class="dropdown-item">(easy) Hello World
+					      </a><a href="#" class="dropdown-item">(easy) JSON parser
+					      </a><a href="#" class="dropdown-item">(easy) Calculator
+					      </a><a href="#" class="dropdown-item">(easy) Fruit flies like bananas
+					      </a></div></div></div></div></div>
+	 		<div id="options" class="svelte-96j91"><div class="list svelte-1abgjqq"><div class="option svelte-1abgjqq"><div class="select"><select><option value="earley">Parser: Earley</option><option value="lalr">Parser: LALR(1)</option></select></div></div>
 
- 		<div id="above_grammar" class="svelte-96j91"><div id="load-grammar" class="svelte-96j91"><div class="option svelte-96j91"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu3"><span>Load Grammar</span>
-			      <span class="icon is-small"><i class="fas fa-angle-down" aria-hidden="true"></i></span></button></div>
-			  <div class="dropdown-menu" id="dropdown-menu3" role="menu"><div class="dropdown-content"><a href="#" class="dropdown-item">Blank
-			      </a><a href="#" class="dropdown-item">(easy) Hello World
-			      </a><a href="#" class="dropdown-item">(easy) JSON parser
-			      </a><a href="#" class="dropdown-item">(easy) Calculator
-			      </a></div></div></div></div></div>
-	 		<div id="options" class="svelte-96j91"><div class="list svelte-1ia7u11"><div class="option svelte-1ia7u11"><div class="select"><select><option value="earley">Parser: Earley</option><option value="lalr">Parser: LALR(1)</option></select></div></div>
-
- 			<div class="option svelte-1ia7u11"><label class="checkbox" for="keep_all_tokens"><input class="checkbox" type="checkbox" id="keep_all_tokens">
+ 			<div class="option svelte-1abgjqq"><label class="checkbox" for="keep_all_tokens"><input class="checkbox" type="checkbox" id="keep_all_tokens">
 	 				Keep all tokens
  				</label></div>
  		</div></div></div>
 
-<div id="grammar" class="svelte-96j91"><div style="flex-grow: 1; overflow: hidden; border: 1px solid grey"></div></div></div>
-	<textarea id="text" class="svelte-96j91">Hello, World!</textarea>
+		<div id="grammar" class="svelte-96j91"><div style="flex-grow: 1; overflow: hidden; border: 1px solid grey"></div></div></div>
+	<textarea id="text" class="svelte-96j91"></textarea>
 
 	<div id="output" class="svelte-96j91">Please wait, loading...
 
-<progress class="progress is-info" value="0" max="4">XX</progress>
-<ul></ul></div>
+		<progress class="progress is-info" value="0" max="4">XX</progress>
+		<ul></ul></div>
 </section></main>
 
 <footer></footer>
 
 
+			
+			<script>
+				{
+					__sveltekit_u0oggl = {
+						base: new URL(".", location).pathname.slice(0, -1),
+						env: {}
+					};
 
-	
-</div>
+					const element = document.currentScript.parentElement;
 
-<!-- 		<script>
-		    window.languagePluginUrl = "https://cdn.jsdelivr.net/pyodide/v0.16.1/full/";
-		</script>
- -->
-<!-- 		<script src="https://cdn.jsdelivr.net/pyodide/v0.16.1/full/pyodide.js" on:load={start}></script>
- -->
-	  	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+					const data = [null,null];
 
-<!-- 	  	<script src="https://cdn.jsdelivr.net/pyodide/v0.18.0/full/pyodide.js"></script>
- -->	  	
+					Promise.all([
+						import("./_app/immutable/entry/start.605fde93.js"),
+						import("./_app/immutable/entry/app.78fc783f.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 	</body>
 </html>
