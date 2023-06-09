@@ -1,5 +1,7 @@
-<script>
-	export let tree
+<script lang="ts">
+	type Tree = {type: string, data: String, children: Tree[]}
+
+	export let tree: Tree
 
 	let expanded = true
 	const toggleExpansion = () => {
@@ -12,7 +14,7 @@
 <ul><!-- transition:slide -->
 	<li>
 {#if tree['type'] === 'Tree'}
-		{#if tree.children.length}
+		{#if tree.children.length > 0}
 			<span on:click={toggleExpansion}>
 				<span class="arrow" class:arrowDown>&#x25b6</span>
 				<span class="label"> 
@@ -22,7 +24,11 @@
 			{#if expanded}
 				<div class="children">
 				{#each [...tree.children] as child}
-					<svelte:self tree={child} />
+					{#if child}
+						<svelte:self tree={child} />
+					{:else}
+						<span class="empty"></span>
+					{/if}
 				{/each}
 				</div>
 			{/if}

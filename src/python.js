@@ -9,7 +9,7 @@ export default function init(callback, log) {
 	  		log && log("Installing micropip")
 	  		await pyodide.loadPackage('micropip')
 	  		log && log("Downloading & Installing Lark")
-  		    await pyodide.runPythonAsync( "import micropip; await micropip.install('lark-parser');" );
+  		    await pyodide.runPythonAsync( "import micropip; await micropip.install('lark');" );
   		    pyodide.runPython( "import lark" );
 
 	  		callback(pyodide)

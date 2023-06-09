@@ -49,7 +49,7 @@
 				title: "(avg) Lark grammar",
 				name: 'lark',
 				text: 'start: "Hello" "World"',
-				options: {parser: 'lalr'},
+				options: {parser: 'lalr', maybe_placeholders: false},
 			},
 		]
 
