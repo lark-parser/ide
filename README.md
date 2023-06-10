@@ -14,3 +14,5 @@ Served on https://lark-parser.github.io/ide
 MIT License
 
 Contributions are welcome!
+
+Author: [Erez Shinan](https://github.com/erezsh)
