@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Tree from '$lib/Tree.svelte'
 	import Editor from '$lib/Editor.svelte'
+	import EditInput from '$lib/EditInput.svelte'
 	import Options from '$lib/Options.svelte'
 	import init_python from '../python.js'
 
@@ -63,7 +64,7 @@
 	let editor_text: string
 
 	let pyodide: {globals: any, runPythonAsync: (s: string) => any}
-	let pyodide_log = []
+	let pyodide_log: string[] = []
 
 	async function editor_ready() {
 		load_grammar('hello')
@@ -72,7 +73,7 @@
 		// If loaded before, they might interfere with each other
 		// Probably due to a require() collision
 		if (!pyodide) {
-			init_python( (p) => {pyodide = p}, (e) => {pyodide_log = [...pyodide_log, e]})
+			init_python( (p) => {pyodide = p}, (e: string) => {pyodide_log = [...pyodide_log, e]})
 		}
 	}
 
@@ -104,9 +105,9 @@
 	async function load_grammar(grammar_to_load) {
 		console.log("Loading grammar", grammar_to_load)
 		if (grammar_to_load === 'blank') {
-			text = ''
 			grammar = 'start:'
 			editor.set_text('')
+			edit_input.set_text('')
 			options = DEFAULT_OPTIONS
 			return;
 		}
@@ -117,14 +118,15 @@
 			editor.set_text(grammar)
 			for (let g of grammars) 
 				if (g.name === grammar_to_load) {
-					text = g.text
+					edit_input.set_text(g.text)
 					options = {...DEFAULT_OPTIONS, ...g.options}
 					break
 				}
 		}
 	}
 
-	let editor
+	let editor: Editor
+	let edit_input: EditInput
 	
 </script>
 
@@ -169,7 +171,10 @@
 			<Editor bind:this={editor} bind:text={editor_text} on:ready={editor_ready}/>
 		</div>
 	</div>
-	<textarea id="text" bind:value={text}></textarea>
+	<!-- <textarea id="text" bind:value={text}></textarea> -->
+	<div id="text">
+		<EditInput bind:this={edit_input} bind:text={text} />
+	</div>
 
 	<div id="output">
 	{#if pyodide}
@@ -235,14 +240,15 @@
 	#text {
 		grid-area: text;
 		height: 100px;
-		resize:  vertical;
+		/* resize:  vertical; */
+		display: flex;
 	}
 	#output {
 		grid-area: output;
 		overflow-x: scroll;
 	}
 
-	textarea, #output, #grammar_pane {
+	#output, #grammar_pane {
 		margin: 20px;
 	}
 
@@ -256,11 +262,6 @@
 		margin-bottom: 10px;
 		padding: 5px;
 	}
-	#load-grammar select {
-		background: #eee;
-		margin-left:  10px;
-	}
-
 	.option {
 		display: flex;
 		align-items: flex-start;
